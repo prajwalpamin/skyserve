@@ -1,0 +1,35 @@
+# Dependency directories
+node_modules/
+
+# Build files
+build/
+dist/
+out/
+public/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below if you'll use `dep`)
+# vendor/
+
+# End of generated files
+
+# IDE/Editor specific
+.idea/
+.vscode/

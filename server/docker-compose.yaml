@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: skyservedb  
+
+  go-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: go-server
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      HOST: postgres
+      PORT: "5432"
+      USERNAM: postgres
+      PASSWORD: postgres
+      DB_NAME: skyservedb  

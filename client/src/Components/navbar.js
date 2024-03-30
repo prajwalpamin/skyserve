@@ -19,9 +19,7 @@ const Navbar = () => {
 
   return (
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">
-        Skyserve
-      </a>
+      <div class="navbar-brand">Skyserve</div>
       <button
         class="navbar-toggler"
         type="button"

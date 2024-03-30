@@ -55,6 +55,7 @@ export const Login = () => {
                       <div className="d-flex align-items-center mb-3 pb-1">
                         <img
                           src={icon}
+                          alt=""
                           style={{
                             width: "50px",
                             height: "auto",

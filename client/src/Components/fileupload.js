@@ -5,9 +5,9 @@ import "../styles/FileUpload.css";
 import axios from "axios";
 
 export const FileUpload = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const baseUrl = process.env.REACT_APP_BASE_URL || `http://localhost:8080`;
-  const [uploadedFiles, setUploadedFiles] = useState([]);
+  // const [uploadedFiles, setUploadedFiles] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [token, setToken] = useState("");
   const [fileRecords, setFileRecords] = useState([]);
@@ -68,7 +68,7 @@ export const FileUpload = () => {
       })
       .then((response) => {
         console.log("Upload successful", response.data);
-        setUploadedFiles(selectedFile);
+        // setUploadedFiles(selectedFile);
         setSelectedFile();
       })
       .catch((error) => {

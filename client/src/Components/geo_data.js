@@ -20,7 +20,7 @@ export const GeoData = () => {
     tooltipAnchor: [16, -28],
     shadowSize: [41, 41],
   });
-  const [activePark, setActivePark] = useState(null);
+  // const [activePark, setActivePark] = useState(null);
 
   return (
     <>
@@ -37,9 +37,9 @@ export const GeoData = () => {
               park.geometry.coordinates[1],
               park.geometry.coordinates[0],
             ]}
-            onClick={() => {
-              setActivePark(park);
-            }}
+            // onClick={() => {
+            //   setActivePark(park);
+            // }}
             icon={DefaultIcon}
           />
         ))}

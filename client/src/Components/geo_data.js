@@ -4,7 +4,7 @@ import icon from "leaflet/dist/images/marker-icon.png";
 import iconRetinaUrl from "leaflet/dist/images/marker-icon-2x.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 import parkData from "../inputfiles/skateboard-parks.json";
-import { useState } from "react";
+// import { useState } from "react";
 import Navbar from "./navbar";
 
 export const GeoData = () => {

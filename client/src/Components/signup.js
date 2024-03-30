@@ -1,11 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import backgroundimg from "../satelite.jpg";
 
 export const Signup = () => {
   const navigate = useNavigate();
+  const baseUrl = process.env.REACT_APP_BASE_URL || `http://localhost:8080`;
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSignup = () => {};
+  const handleSignup = () => {
+    axios
+      .post(`${baseUrl}/signup`, {
+        email,
+        user_name: username,
+        password,
+        confirmPassword,
+      })
+      .then((response) => {
+        console.log(response);
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.error("Signup error:", error);
+      });
+  };
+
   const onLoginClick = () => {
     navigate("/");
   };
@@ -47,6 +68,8 @@ export const Signup = () => {
                           type="text"
                           id="username"
                           className="form-control form-control-lg"
+                          value={username}
+                          onChange={(e) => setUsername(e.target.value)}
                         />
                         <label className="form-label" htmlFor="username">
                           Username
@@ -58,6 +81,8 @@ export const Signup = () => {
                           type="email"
                           id="email"
                           className="form-control form-control-lg"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
                         />
                         <label className="form-label" htmlFor="email">
                           Email address
@@ -69,6 +94,8 @@ export const Signup = () => {
                           type="password"
                           id="password"
                           className="form-control form-control-lg"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
                         />
                         <label className="form-label" htmlFor="password">
                           Password
@@ -79,6 +106,8 @@ export const Signup = () => {
                           type="password"
                           id="password"
                           className="form-control form-control-lg"
+                          value={confirmPassword}
+                          onChange={(e) => setConfirmPassword(e.target.value)}
                         />
                         <label className="form-label" htmlFor="password">
                           Confirm Password

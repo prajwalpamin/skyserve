@@ -5,7 +5,6 @@ node_modules/
 build/
 dist/
 out/
-public/
 
 # OS-specific
 .DS_Store

@@ -37,7 +37,7 @@ const Navbar = () => {
             <p
               class="nav-link"
               onClick={handleUploadClick}
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer", margin: 0 }}
             >
               Home <span class="sr-only">(current)</span>
             </p>
@@ -46,7 +46,7 @@ const Navbar = () => {
             <p
               class="nav-link"
               onClick={handleMapsClick}
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer", margin: 0 }}
             >
               maps
             </p>
@@ -55,7 +55,12 @@ const Navbar = () => {
             <p
               class="nav-link"
               onClick={handleLogout}
-              style={{ cursor: "pointer", color: "red" }}
+              style={{
+                cursor: "pointer",
+                color: "red",
+                margin: 0,
+                marginLeft: "100%",
+              }}
             >
               Logout
             </p>

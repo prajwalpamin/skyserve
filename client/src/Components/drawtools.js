@@ -1,15 +1,9 @@
-import React, { useState } from "react";
-// import L from "leaflet";
-import {
-  Map,
-  TileLayer,
-  Marker,
-  Popup,
-  FeatureGroup,
-  Circle,
-} from "react-leaflet";
+import React from "react";
+import { FeatureGroup } from "react-leaflet";
 import { EditControl } from "react-leaflet-draw";
-
+import "leaflet/dist/leaflet.css";
+import "leaflet-draw/dist/leaflet.draw.css";
+import L from "leaflet";
 const DrawTools = () => {
   const _onEdited = (e) => {
     let numEdited = 0;
@@ -25,14 +19,13 @@ const DrawTools = () => {
     let type = e.layerType;
     let layer = e.layer;
     if (type === "marker") {
-      // Do marker specific actions
       console.log("_onCreated: marker created", e);
     } else {
       console.log("_onCreated: something else created:", type, e);
     }
 
     console.log("Geojson", layer.toGeoJSON());
-    console.log("coords", layer.getLatLngs());
+    console.log("coords", layer);
   };
 
   const _onDeleted = (e) => {
@@ -45,25 +38,25 @@ const DrawTools = () => {
     // this._onChange();
   };
 
-  const _onMounted = (drawControl) => {
-    console.log("_onMounted", drawControl);
-  };
+  // const _onMounted = (drawControl) => {
+  //   console.log("_onMounted", drawControl);
+  // };
 
-  const _onEditStart = (e) => {
-    console.log("_onEditStart", e);
-  };
+  // const _onEditStart = (e) => {
+  //   console.log("_onEditStart", e);
+  // };
 
-  const _onEditStop = (e) => {
-    console.log("_onEditStop", e);
-  };
+  // const _onEditStop = (e) => {
+  //   console.log("_onEditStop", e);
+  // };
 
-  const _onDeleteStart = (e) => {
-    console.log("_onDeleteStart", e);
-  };
+  // const _onDeleteStart = (e) => {
+  //   console.log("_onDeleteStart", e);
+  // };
 
-  const _onDeleteStop = (e) => {
-    console.log("_onDeleteStop", e);
-  };
+  // const _onDeleteStop = (e) => {
+  //   console.log("_onDeleteStop", e);
+  // };
 
   const _onDrawStart = (e) => {
     console.log("_onDrawStart", e);

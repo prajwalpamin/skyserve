@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import backgroundimg from "../satelite.jpg";
 import axios from "axios";
+import icon from "../skyserve.jpeg";
 
 export const Signup = () => {
   const navigate = useNavigate();

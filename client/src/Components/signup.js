@@ -50,11 +50,16 @@ export const Signup = () => {
                   <div className="card-body p-4 p-lg-5 text-black">
                     <form>
                       <div className="d-flex align-items-center mb-3 pb-1">
-                        <i
-                          className="fas fa-cubes fa-2x me-3"
-                          style={{ color: "#ff6219" }}
-                        ></i>
-                        <span className="h1 fw-bold mb-0">Logo</span>
+                        <img
+                          src={icon}
+                          alt=""
+                          style={{
+                            width: "50px",
+                            height: "auto",
+                            borderRadius: "25px",
+                          }}
+                        />
+                        <span className="h1 fw-bold mb-0">Skyserve</span>
                       </div>
 
                       <h5

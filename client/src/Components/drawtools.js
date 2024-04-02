@@ -52,9 +52,9 @@ const DrawTools = () => {
         }
       )
       .then((response) => {
-        console.log("Data saved successfully");
         setFileName("");
         setDrawnData(null);
+        alert("Data uploaded successfully");
       })
       .catch((error) => {
         console.error("Failed to save data:", error);

@@ -11,7 +11,7 @@ func SetupGeoRoutes(router *gin.Engine) {
 	{
 		userRouter.GET("/get_file", controller.GetFileByID)
 		userRouter.GET("/get_all", controller.GetAllFiles)
-
+		userRouter.POST("/create", controller.CreateGeoFile)
 		userRouter.POST("/upload", controller.UploadJSONFiles)
 	}
 }

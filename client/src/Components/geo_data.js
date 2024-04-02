@@ -7,9 +7,10 @@ import parkData from "../inputfiles/skateboard-parks.json";
 import Navbar from "./navbar";
 
 import DrawTools from "./drawtools";
+import "../styles/geodata.css";
 
 export const GeoData = () => {
-  const center = [51.505, -0.09];
+  const indiaCoordinates = [20.5937, 78.9629];
 
   let DefaultIcon = L.icon({
     iconUrl: icon,
@@ -21,12 +22,11 @@ export const GeoData = () => {
     tooltipAnchor: [16, -28],
     shadowSize: [41, 41],
   });
-  // const [activePark, setActivePark] = useState(null);
 
   return (
-    <>
+    <div className="main_map_container">
       <Navbar />
-      <MapContainer center={center} zoom={12} scrollWheelZoom={false}>
+      <MapContainer center={indiaCoordinates} zoom={10} scrollWheelZoom={false}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -38,14 +38,11 @@ export const GeoData = () => {
               park.geometry.coordinates[1],
               park.geometry.coordinates[0],
             ]}
-            // onClick={() => {
-            //   setActivePark(park);
-            // }}
             icon={DefaultIcon}
           />
         ))}
-        <DrawTools />
+        <DrawTools className="drawtools" />
       </MapContainer>
-    </>
+    </div>
   );
 };

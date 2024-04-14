@@ -97,6 +97,7 @@ const DrawTools = ({ onFileLoad }) => {
     console.log(`onDeleted: removed ${numDeleted} layers`, e);
   };
   const handleLoadData = () => {
+    console.log("clicked handle load data");
     const selectedFile = loadFileData.find(
       (file) => file.id === parseInt(selectedFileId)
     );

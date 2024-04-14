@@ -101,6 +101,7 @@ const DrawTools = ({ onFileLoad }) => {
     const selectedFile = loadFileData.find(
       (file) => file.id === parseInt(selectedFileId)
     );
+    console.log(selectedFile);
     if (selectedFile) {
       onFileLoad(JSON.parse(JSON.parse(selectedFile.file_data)));
     }

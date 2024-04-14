@@ -10,13 +10,15 @@ import L from "leaflet";
 import axios from "axios";
 import "../styles/FileUpload.css";
 
-const DrawTools = () => {
+const DrawTools = ({ onFileLoad }) => {
   const baseUrl = process.env.REACT_APP_BASE_URL || `http://localhost:8080`;
 
-  const [drawnData, setDrawnData] = useState(null);
+  const [drawnData, setDrawnData] = useState([]);
   const [fileName, setFileName] = useState("");
   const [token, setToken] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [selectedFileId, setSelectedFileId] = useState(null);
+  const [loadFileData, setLoadFileData] = useState([]);
 
   let DefaultIcon = L.icon({
     iconUrl: icon,
@@ -28,13 +30,28 @@ const DrawTools = () => {
     tooltipAnchor: [16, -28],
     shadowSize: [41, 41],
   });
+
   useEffect(() => {
-    const storedItem = localStorage.getItem("token");
-    console.log(storedItem);
-    if (storedItem) {
-      setToken(JSON.parse(JSON.stringify(storedItem)));
-    }
-  }, []);
+    const fetchFileData = async () => {
+      try {
+        const storedToken = localStorage.getItem("token");
+        const parsedToken = storedToken ? JSON.parse(storedToken) : null;
+        setToken(parsedToken);
+
+        const response = await axios.get(`${baseUrl}/file/get_all`, {
+          headers: {
+            Authorization: parsedToken,
+          },
+        });
+
+        setLoadFileData(response.data.files);
+      } catch (error) {
+        console.error("Failed to fetch file data:", error);
+      }
+    };
+    fetchFileData();
+  }, [baseUrl]);
+
   const handleInputChange = (e) => {
     setFileName(e.target.value);
     setIsButtonDisabled(e.target.value === "");
@@ -53,7 +70,7 @@ const DrawTools = () => {
       )
       .then((response) => {
         setFileName("");
-        setDrawnData(null);
+        setDrawnData([]);
         alert("Data uploaded successfully");
       })
       .catch((error) => {
@@ -61,29 +78,14 @@ const DrawTools = () => {
       });
   };
 
-  const _onEdited = (e) => {
-    setDrawnData(e.layers.toGeoJSON());
-    let numEdited = 0;
-    e.layers.eachLayer((layer) => {
-      numEdited += 1;
-    });
-    console.log(`_onEdited: edited ${numEdited} layers`, e);
-
-    // this._onChange();
+  const _onCreated = (e) => {
+    const newLayer = e.layer.toGeoJSON();
+    setDrawnData((prevData) => [...prevData, newLayer]);
   };
 
-  const _onCreated = (e) => {
-    setDrawnData(e.layer.toGeoJSON());
-    let type = e.layerType;
-    let layer = e.layer;
-    if (type === "marker") {
-      console.log("_onCreated: marker created", e);
-    } else {
-      console.log("_onCreated: something else created:", type, e);
-    }
-
-    console.log("Geojson", layer.toGeoJSON());
-    console.log("coords", layer);
+  const _onEdited = (e) => {
+    const editedLayers = e.layers.toGeoJSON();
+    setDrawnData(editedLayers.features);
   };
 
   const _onDeleted = (e) => {
@@ -94,7 +96,14 @@ const DrawTools = () => {
     });
     console.log(`onDeleted: removed ${numDeleted} layers`, e);
   };
-
+  const handleLoadData = () => {
+    const selectedFile = loadFileData.find(
+      (file) => file.id === parseInt(selectedFileId)
+    );
+    if (selectedFile) {
+      onFileLoad(JSON.parse(JSON.parse(selectedFile.file_data)));
+    }
+  };
   const _onDrawStart = (e) => {
     console.log("_onDrawStart", e);
   };
@@ -142,6 +151,24 @@ const DrawTools = () => {
           disabled={isButtonDisabled}
         >
           Save Data
+        </button>
+        <select
+          className="styled-input"
+          onChange={(e) => setSelectedFileId(e.target.value)}
+        >
+          <option value="">Select File</option>
+          {loadFileData.map((file) => (
+            <option key={file.id} value={file.id}>
+              {file.file_name}
+            </option>
+          ))}
+        </select>
+        <button
+          className="save-button"
+          onClick={handleLoadData}
+          // disabled={isButtonDisabled}
+        >
+          Load Data
         </button>
       </div>
     </FeatureGroup>

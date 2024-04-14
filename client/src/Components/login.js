@@ -21,7 +21,7 @@ export const Login = () => {
       })
       .then((response) => {
         console.log(response);
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("token", JSON.stringify(response.data.token));
         navigate("/geoData");
       })
       .catch((error) => {

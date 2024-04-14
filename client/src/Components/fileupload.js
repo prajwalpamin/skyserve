@@ -13,27 +13,30 @@ export const FileUpload = () => {
   const [fileRecords, setFileRecords] = useState([]);
 
   useEffect(() => {
-    // Retrieve item from local storage
-    const storedItem = localStorage.getItem("token");
-    console.log(storedItem);
-    if (storedItem) {
-      setToken(JSON.parse(JSON.stringify(storedItem)));
-    }
+    const fetchFileRecords = async () => {
+      try {
+        // Retrieve item from local storage
+        const storedItem = localStorage.getItem("token");
+        console.log(storedItem);
+        if (storedItem) {
+          const parsedToken = JSON.parse(storedItem);
+          setToken(parsedToken);
+        }
 
-    // Fetch file records from the database
-    axios
-      .get(`${baseUrl}/file/get_all`, {
-        headers: {
-          Authorization: token,
-        },
-      })
-      .then((response) => {
+        // Fetch file records from the database
+        const response = await axios.get(`${baseUrl}/file/get_all`, {
+          headers: {
+            Authorization: token,
+          },
+        });
         console.log("Fetched records:", response.data);
         setFileRecords(response.data.files);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching records:", error);
-      });
+      }
+    };
+
+    fetchFileRecords();
   }, [baseUrl, token]);
 
   //   const handleFileChange = (event) => {

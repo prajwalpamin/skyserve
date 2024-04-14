@@ -156,7 +156,11 @@ const DrawTools = ({ onFileLoad }) => {
           className="styled-input"
           onChange={(e) => setSelectedFileId(e.target.value)}
         >
-          <option value="">Select File</option>
+          {loadFileData.length === 0 && (
+            <option value="" disabled>
+              No files available
+            </option>
+          )}
           {loadFileData.map((file) => (
             <option key={file.id} value={file.id}>
               {file.file_name}

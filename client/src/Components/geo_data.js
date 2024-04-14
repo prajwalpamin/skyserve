@@ -78,6 +78,7 @@ export const GeoData = () => {
   };
 
   const handleFileLoad = (data) => {
+    console.log("handlefileloadd", data);
     setLoadedJson(data);
   };
 
